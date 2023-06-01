@@ -34,8 +34,8 @@
             var link = linkInput.value.trim();
 
             if (link !== "") {
-                var loaderWindow = window.opener;
-                loaderWindow.postMessage({ command: "openWindow", url: link }, "*");
+                localStorage.setItem("link", link);
+                window.location.href = "loader.html";
             }
         }
     </script>
