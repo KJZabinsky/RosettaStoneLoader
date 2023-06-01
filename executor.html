@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Executor</title>
+    <title>Executor</title>
+    <script>
+        const socket = new WebSocket("ws://localhost:3000");
+
+        function executeLink() {
+            const link = document.getElementById("linkInput").value;
+
+            socket.send(JSON.stringify({
+                type: "openLink",
+                link: link
+            }));
+
+            console.log("Link sent to loader: " + link);
+        }
+    </script>
 </head>
 <body>
-  <input type="text" id="linkInput" placeholder="Enter a link">
-  <button onclick="execute()">Execute</button>
-  <br>
-  <iframe id="resultFrame" width="100%" height="400"></iframe>
-
-  <script>
-    function execute() {
-      var link = document.getElementById("linkInput").value;
-      document.getElementById("resultFrame").src = link;
-      console.log("Link executed: " + link);
-    }
-  </script>
+    <input type="text" id="linkInput" placeholder="Enter a link">
+    <button onclick="executeLink()">Execute</button>
 </body>
 </html>
