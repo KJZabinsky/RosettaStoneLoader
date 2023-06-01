@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Remote JavaScript Executor 2</title>
+    <title>Remote JavaScript Executor</title>
     <style>
         body {
             background-color: #f1f1f1;
@@ -59,6 +59,21 @@
         function openWindow(url) {
             loaderWindow.postMessage({ command: "openWindow", url: url }, "*");
         }
+
+        // Listen for messages from the loader window
+        window.addEventListener("message", function (event) {
+            if (event.data === "Open Loader Window") {
+                openLoaderWindow();
+            }
+        });
+
+        // Open the loader window
+        function openLoaderWindow() {
+            var loaderWindow = window.open("loader.html");
+            loaderWindow.addEventListener("message", function (event) {
+                log(event.data);
+            });
+        }
     </script>
 </head>
 <body>
@@ -71,13 +86,6 @@
     <h2>Console</h2>
     <div id="console"></div>
 
-    <iframe id="loaderFrame" src="https://kjzabinsky.github.io/RosettaStoneLoader/loader.html" style="display: none;"></iframe>
-
-    <script>
-        document.getElementById('loaderFrame').addEventListener('load', function() {
-            loaderWindow = document.getElementById('loaderFrame').contentWindow;
-            loaderWindow.postMessage("Executor Ready", "*");
-        });
-    </script>
+    <button onclick="openLoaderWindow()">Open Loader Window</button>
 </body>
 </html>
