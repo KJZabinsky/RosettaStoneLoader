@@ -34,8 +34,7 @@
     <script>
         function executeCode() {
             var code = document.getElementById('codeInput').value;
-            var loaderFrame = document.getElementById('loaderFrame');
-            loaderFrame.contentWindow.postMessage({ code: code }, "*");
+            loaderWindow.postMessage({ code: code }, "*");
         }
 
         function log(message) {
@@ -44,9 +43,19 @@
             console.scrollTop = console.scrollHeight;
         }
 
+        var loaderWindow;
+
         window.addEventListener("message", function (event) {
-            log(event.data);
+            if (event.data === "Loader Ready") {
+                loaderWindow = event.source;
+            } else {
+                log(event.data);
+            }
         });
+
+        function openWindow(url) {
+            loaderWindow.postMessage({ command: "openWindow", url: url }, "*");
+        }
     </script>
 </head>
 <body>
@@ -60,14 +69,5 @@
     <div id="console"></div>
 
     <iframe id="loaderFrame" src="https://kjzabinsky.github.io/RosettaStoneLoader/loader.html" style="display: none;"></iframe>
-    <script>
-        // Handle commands executed on the executor.html side
-        window.addEventListener("message", function (event) {
-            if (event.data.command === "openWindow") {
-                var url = event.data.url;
-                window.open(url, "_blank");
-            }
-        });
-    </script>
 </body>
 </html>
