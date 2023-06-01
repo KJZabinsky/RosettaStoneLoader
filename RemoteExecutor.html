@@ -32,16 +32,10 @@
         }
     </style>
     <script>
-        var loaderWindow = null;
-        
         function executeCode() {
             var code = document.getElementById('codeInput').value;
-            
-            if (loaderWindow) {
-                loaderWindow.postMessage(code, "*");
-            } else {
-                log("Loader window not found!");
-            }
+            var loaderFrame = document.getElementById('loaderFrame');
+            loaderFrame.contentWindow.postMessage(code, "*");
         }
         
         function log(message) {
@@ -53,24 +47,10 @@
         window.addEventListener("message", function (event) {
             log("Result: " + event.data);
         });
-        
-        function openLoaderWindow() {
-            loaderWindow = window.open("loader.html", "_blank");
-        }
-        
-        function closeLoaderWindow() {
-            if (loaderWindow) {
-                loaderWindow.close();
-                loaderWindow = null;
-            }
-        }
     </script>
 </head>
 <body>
     <h1>Remote JavaScript Executor</h1>
-    
-    <button onclick="openLoaderWindow()">Open Loader</button>
-    <button onclick="closeLoaderWindow()">Close Loader</button>
     
     <h2>Execute JavaScript</h2>
     <textarea id="codeInput" placeholder="Paste your JavaScript code here"></textarea>
@@ -78,5 +58,7 @@
     
     <h2>Console</h2>
     <div id="console"></div>
+    
+    <iframe id="loaderFrame" src="loader.html" style="display: none;"></iframe>
 </body>
 </html>
