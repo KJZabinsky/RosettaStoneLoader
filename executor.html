@@ -8,7 +8,7 @@
             padding: 20px;
             font-family: Arial, sans-serif;
         }
-        
+
         #console {
             background-color: #ffffff;
             border: 1px solid #ccc;
@@ -16,12 +16,12 @@
             height: 300px;
             overflow: auto;
         }
-        
+
         #codeInput {
             width: 100%;
             margin-bottom: 10px;
         }
-        
+
         #executeButton {
             background-color: #00a5e3;
             color: #ffffff;
@@ -37,17 +37,13 @@
             var loaderFrame = document.getElementById('loaderFrame');
             loaderFrame.contentWindow.postMessage({ code: code }, "*");
         }
-        
+
         function log(message) {
             var console = document.getElementById('console');
-            if (message instanceof Window) {
-                console.innerHTML += "Result: [object Window]<br>";
-            } else {
-                console.innerHTML += "Result: " + message + "<br>";
-            }
+            console.innerHTML += "Result: " + message + "<br>";
             console.scrollTop = console.scrollHeight;
         }
-        
+
         window.addEventListener("message", function (event) {
             log(event.data);
         });
@@ -55,14 +51,22 @@
 </head>
 <body>
     <h1>Remote JavaScript Executor</h1>
-    
+
     <h2>Execute JavaScript</h2>
     <textarea id="codeInput" placeholder="Paste your JavaScript code here"></textarea>
     <button id="executeButton" onclick="executeCode()">Execute</button>
-    
+
     <h2>Console</h2>
     <div id="console"></div>
-    
+
     <iframe id="loaderFrame" src="loader.html" style="display: none;"></iframe>
+    <script>
+        // Handle commands executed on the executor.html side
+        window.addEventListener("message", function (event) {
+            if (event.data.command === "openWindow") {
+                window.open(event.data.url, event.data.target);
+            }
+        });
+    </script>
 </body>
 </html>
