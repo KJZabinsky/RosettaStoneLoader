@@ -50,5 +50,19 @@
 </head>
 <body>
     <div class="loader"></div>
+
+    <script>
+        window.addEventListener("message", function (event) {
+            if (event.data.command === "openWindow") {
+                var url = event.data.url;
+                var iframe = document.createElement("iframe");
+                iframe.src = url;
+                iframe.style.width = "100%";
+                iframe.style.height = "100%";
+                iframe.style.border = "none";
+                document.body.appendChild(iframe);
+            }
+        });
+    </script>
 </body>
 </html>
