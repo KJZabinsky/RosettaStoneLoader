@@ -72,5 +72,12 @@
     <div id="console"></div>
 
     <iframe id="loaderFrame" src="https://kjzabinsky.github.io/RosettaStoneLoader/loader.html" style="display: none;"></iframe>
+
+    <script>
+        document.getElementById('loaderFrame').addEventListener('load', function() {
+            loaderWindow = document.getElementById('loaderFrame').contentWindow;
+            loaderWindow.postMessage("Executor Ready", "*");
+        });
+    </script>
 </body>
 </html>
