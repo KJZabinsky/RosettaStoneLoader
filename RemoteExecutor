@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Remote JavaScript Executor</title>
+    <style>
+        body {
+            background-color: #f1f1f1;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        
+        #console {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 300px;
+            overflow: auto;
+        }
+        
+        #codeInput {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        #executeButton {
+            background-color: #00a5e3;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        var loaderWindow = null;
+        
+        function executeCode() {
+            var code = document.getElementById('codeInput').value;
+            
+            if (loaderWindow) {
+                loaderWindow.postMessage(code, "*");
+            } else {
+                log("Loader window not found!");
+            }
+        }
+        
+        function log(message) {
+            var console = document.getElementById('console');
+            console.innerHTML += message + "<br>";
+            console.scrollTop = console.scrollHeight;
+        }
+        
+        window.addEventListener("message", function (event) {
+            log("Result: " + event.data);
+        });
+        
+        function openLoaderWindow() {
+            loaderWindow = window.open("loader.html", "_blank");
+        }
+        
+        function closeLoaderWindow() {
+            if (loaderWindow) {
+                loaderWindow.close();
+                loaderWindow = null;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Remote JavaScript Executor</h1>
+    
+    <button onclick="openLoaderWindow()">Open Loader</button>
+    <button onclick="closeLoaderWindow()">Close Loader</button>
+    
+    <h2>Execute JavaScript</h2>
+    <textarea id="codeInput" placeholder="Paste your JavaScript code here"></textarea>
+    <button id="executeButton" onclick="executeCode()">Execute</button>
+    
+    <h2>Console</h2>
+    <div id="console"></div>
+</body>
+</html>
