@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to Rosetta Stone!</title>
+    <title>Loader Screen</title>
     <style>
         body {
             background-color: #ffffff;
@@ -39,14 +39,19 @@
                 window.parent.postMessage("Error: " + error, "*");
             }
         });
+
+        // Handle commands executed on the loader.html side
+        window.addEventListener("message", function (event) {
+            if (event.data.command === "openWindow") {
+                window.open(event.data.url, event.data.target);
+            }
+        });
+
+        // Notify the parent window that the loader is ready
+        window.parent.postMessage("Loader Ready", "*");
     </script>
 </head>
 <body>
     <div class="loader"></div>
-
-    <script>
-        // Notify the parent window that the loader is ready
-        window.parent.postMessage("Loader Ready", "*");
-    </script>
 </body>
 </html>
