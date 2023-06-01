@@ -35,7 +35,7 @@
         function executeCode() {
             var code = document.getElementById('codeInput').value;
             var loaderFrame = document.getElementById('loaderFrame');
-            loaderFrame.contentWindow.postMessage(code, "*");
+            loaderFrame.contentWindow.postMessage({ code: code }, "*");
         }
         
         function log(message) {
