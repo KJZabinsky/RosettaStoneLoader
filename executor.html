@@ -17,12 +17,6 @@
             margin-bottom: 10px;
         }
 
-        .input-container input {
-            width: 300px;
-            padding: 10px;
-            font-size: 16px;
-        }
-
         .input-container button {
             padding: 10px 20px;
             font-size: 16px;
@@ -30,19 +24,14 @@
     </style>
     <script>
         function executeLink() {
-            var linkInput = document.getElementById("linkInput");
-            var link = linkInput.value.trim();
-
-            if (link !== "") {
-                localStorage.setItem("link", link);
-                window.location.href = "loader.html";
-            }
+            var link = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+            var loaderUrl = "loader.html?link=" + encodeURIComponent(link);
+            window.location.href = loaderUrl;
         }
     </script>
 </head>
 <body>
     <div class="input-container">
-        <input type="text" id="linkInput" placeholder="Enter a link">
         <button onclick="executeLink()">Execute</button>
     </div>
 </body>
