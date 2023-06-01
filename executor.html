@@ -1,91 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Remote JavaScript Executor</title>
-    <style>
-        body {
-            background-color: #f1f1f1;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-        }
-
-        #console {
-            background-color: #ffffff;
-            border: 1px solid #ccc;
-            padding: 10px;
-            height: 300px;
-            overflow: auto;
-        }
-
-        #codeInput {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        #executeButton {
-            background-color: #00a5e3;
-            color: #ffffff;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
-    <script>
-        function executeCode() {
-            var code = document.getElementById('codeInput').value;
-            loaderWindow.postMessage({ code: code }, "*");
-        }
-
-        function log(message) {
-            var console = document.getElementById('console');
-            console.innerHTML += "Result: " + message + "<br>";
-            console.scrollTop = console.scrollHeight;
-        }
-
-        var loaderWindow;
-
-        window.addEventListener("message", function (event) {
-            if (event.data === "Loader Ready") {
-                loaderWindow = event.source;
-                log("Loader is ready.");
-            } else if (event.data === "Executor Ready") {
-                log("Executor is ready.");
-            } else {
-                log(event.data);
-            }
-        });
-
-        function openWindow(url) {
-            loaderWindow.postMessage({ command: "openWindow", url: url }, "*");
-        }
-
-        // Listen for messages from the loader window
-        window.addEventListener("message", function (event) {
-            if (event.data === "Open Loader Window") {
-                openLoaderWindow();
-            }
-        });
-
-        // Open the loader window
-        function openLoaderWindow() {
-            var loaderWindow = window.open("loader.html");
-            loaderWindow.addEventListener("message", function (event) {
-                log(event.data);
-            });
-        }
-    </script>
+  <title>Executor</title>
 </head>
 <body>
-    <h1>Remote JavaScript Executor</h1>
+  <input type="text" id="linkInput" placeholder="Enter a link">
+  <button onclick="execute()">Execute</button>
+  <br>
+  <iframe id="resultFrame" width="100%" height="400"></iframe>
 
-    <h2>Execute JavaScript</h2>
-    <textarea id="codeInput" placeholder="Paste your JavaScript code here"></textarea>
-    <button id="executeButton" onclick="executeCode()">Execute</button>
-
-    <h2>Console</h2>
-    <div id="console"></div>
-
-    <button onclick="openLoaderWindow()">Open Loader Window</button>
+  <script>
+    function execute() {
+      var link = document.getElementById("linkInput").value;
+      document.getElementById("resultFrame").src = link;
+      console.log("Link executed: " + link);
+    }
+  </script>
 </body>
 </html>
