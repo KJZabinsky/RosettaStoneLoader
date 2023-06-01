@@ -42,6 +42,10 @@
                 document.body.appendChild(iframe);
             }
         });
+
+        window.onload = function () {
+            window.opener.postMessage("Loader Ready", "*");
+        };
     </script>
 </head>
 <body>
