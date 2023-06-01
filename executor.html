@@ -48,6 +48,9 @@
         window.addEventListener("message", function (event) {
             if (event.data === "Loader Ready") {
                 loaderWindow = event.source;
+                log("Loader is ready.");
+            } else if (event.data === "Executor Ready") {
+                log("Executor is ready.");
             } else {
                 log(event.data);
             }
