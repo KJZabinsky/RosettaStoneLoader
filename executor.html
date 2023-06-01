@@ -40,12 +40,16 @@
         
         function log(message) {
             var console = document.getElementById('console');
-            console.innerHTML += message + "<br>";
+            if (message instanceof Window) {
+                console.innerHTML += "Result: [object Window]<br>";
+            } else {
+                console.innerHTML += "Result: " + message + "<br>";
+            }
             console.scrollTop = console.scrollHeight;
         }
         
         window.addEventListener("message", function (event) {
-            log("Result: " + event.data);
+            log(event.data);
         });
     </script>
 </head>
