@@ -31,38 +31,24 @@
         }
     </style>
     <script>
-        window.addEventListener("message", function (event) {
-            if (event.data.command === "openWindow") {
-                var url = event.data.url;
+        function openLink() {
+            var link = localStorage.getItem("link");
+            if (link) {
                 var iframe = document.createElement("iframe");
-                iframe.src = url;
+                iframe.src = link;
                 iframe.style.width = "100%";
                 iframe.style.height = "100%";
                 iframe.style.border = "none";
                 document.body.appendChild(iframe);
             }
-        });
+        }
 
         window.onload = function () {
-            window.opener.postMessage("Loader Ready", "*");
+            openLink();
         };
     </script>
 </head>
 <body>
     <div class="loader"></div>
-
-    <script>
-        window.addEventListener("message", function (event) {
-            if (event.data.command === "openWindow") {
-                var url = event.data.url;
-                var iframe = document.createElement("iframe");
-                iframe.src = url;
-                iframe.style.width = "100%";
-                iframe.style.height = "100%";
-                iframe.style.border = "none";
-                document.body.appendChild(iframe);
-            }
-        });
-    </script>
 </body>
 </html>
