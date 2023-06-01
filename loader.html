@@ -58,5 +58,11 @@
 </head>
 <body>
     <div class="loader"></div>
+
+    <script>
+        window.onload = function () {
+            parent.postMessage("Loader Ready", "*");
+        };
+    </script>
 </body>
 </html>
