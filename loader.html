@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Loader Screen B</title>
+    <title>Loader Screen</title>
     <style>
         body {
             background-color: #ffffff;
@@ -37,15 +37,6 @@
                 window.parent.postMessage(result, "*");
             } catch (error) {
                 window.parent.postMessage("Error: " + error, "*");
-            }
-        });
-
-        // Handle commands executed on the loader.html side
-        window.addEventListener("message", function (event) {
-            if (event.data.command === "openWindow") {
-                var options = event.data.options;
-                var win = window.open("", options.target, options.features);
-                win.location.href = options.url;
             }
         });
 
