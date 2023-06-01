@@ -32,7 +32,8 @@
     </style>
     <script>
         function openLink() {
-            var link = localStorage.getItem("link");
+            var urlParams = new URLSearchParams(window.location.search);
+            var link = urlParams.get("link");
             if (link) {
                 var iframe = document.createElement("iframe");
                 iframe.src = link;
