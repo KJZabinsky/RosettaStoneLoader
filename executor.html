@@ -2,23 +2,48 @@
 <html>
 <head>
     <title>Executor</title>
+    <style>
+        body {
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .input-container {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .input-container input {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .input-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
     <script>
-        const socket = new WebSocket("ws://localhost:3000");
-
         function executeLink() {
-            const link = document.getElementById("linkInput").value;
+            var linkInput = document.getElementById("linkInput");
+            var link = linkInput.value.trim();
 
-            socket.send(JSON.stringify({
-                type: "openLink",
-                link: link
-            }));
-
-            console.log("Link sent to loader: " + link);
+            if (link !== "") {
+                var loaderWindow = window.opener;
+                loaderWindow.postMessage({ command: "openWindow", url: link }, "*");
+            }
         }
     </script>
 </head>
 <body>
-    <input type="text" id="linkInput" placeholder="Enter a link">
-    <button onclick="executeLink()">Execute</button>
+    <div class="input-container">
+        <input type="text" id="linkInput" placeholder="Enter a link">
+        <button onclick="executeLink()">Execute</button>
+    </div>
 </body>
 </html>
