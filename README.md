@@ -12,7 +12,7 @@ https://kjzabinsky.github.io/RosettaStoneLoader/loader.html?link=https%3A%2F%2Fw
 Gmail
 https://kjzabinsky.github.io/RosettaStoneLoader/loader.html?link=https%3A%2F%2Fmail.google.com%2F
 
-Subconfirmation - KJZ Corporation YouTube
+KJZ Corporation YouTube
 https://kjzabinsky.github.io/RosettaStoneLoader/loader.html?link=https%3A%2F%2Fwww.youtube.com%2F@kjzcorporation
 
 RickRoll Autoplay
