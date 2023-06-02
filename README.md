@@ -2,6 +2,7 @@
 Rosetta Stone Loader
 This will create a fake loading screen that will load forever.
 Make sure to change the url bar to the Rosetta Stone Link to their homepage.
+Please use the links wisely. Do not harm anyone in any way or form.
 
 Special Links Listed Below
 
