@@ -10,3 +10,5 @@ https://kjzabinsky.github.io/RosettaStoneLoader/loader.html?link=https%3A%2F%2Fw
 https://kjzabinsky.github.io/RosettaStoneLoader/loader.html?link=https%3A%2F%2Fmail.google.com%2F
 
 https://kjzabinsky.github.io/RosettaStoneLoader/loader.html?link=https%3A%2F%2Fwww.youtube.com%2F@kjzcorporation
+
+https://kjzabinsky.github.io/RosettaStoneLoader/loader.html?link=https://kjzabinsky.github.io/RosettaStoneLoader/prankload.html
