@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PRANKED</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+        }
+    </style>
+</head>
+<body>
+    <video src="https://kjzabinsky.github.io/RosettaStoneLoader/video.mp4" autoplay controls></video>
+
+    <script>
+        var video = document.querySelector('video');
+        video.addEventListener('loadedmetadata', function() {
+            video.play();
+        });
+
+        function toggleFullScreen() {
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if (video.mozRequestFullScreen) {
+                video.mozRequestFullScreen();
+            } else if (video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+            } else if (video.msRequestFullscreen) {
+                video.msRequestFullscreen();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleFullScreen();
+        });
+    </script>
+</body>
+</html>
