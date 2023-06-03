@@ -1,12 +1,18 @@
 # Rosetta Stone Loader - KJ Zabinsky
 Rosetta Stone Loader
 
+PLEASE READ THE FOLLOWING
+
 This will create a fake loading screen that will load forever.
 Make sure to change the url bar to the Rosetta Stone Link to their homepage.
 Please use the links wisely. Do not harm anyone in any way or form.
 
 To launch the loader use this link below, Remember to bookmark it for future use!
 https://kjzabinsky.github.io/RosettaStoneLoader/loader.html
+
+Special Controls
+Spacebar - Open Chat Window
+?link= - Adds a link to open after 30 seconds
 
 Special Links Listed Below
 
