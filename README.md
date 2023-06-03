@@ -10,11 +10,9 @@ Please use the links wisely. Do not harm anyone in any way or form.
 To launch the loader use this link below, Remember to bookmark it for future use!
 https://kjzabinsky.github.io/RosettaStoneLoader/loader.html
 
-Special Controls
 Spacebar - Open Chat Window
-?link= - Adds a link to open after 30 seconds
 
-Special Links Listed Below
+Special Links Listed Below (You can customize these!)
 
 RickRoll
 https://kjzabinsky.github.io/RosettaStoneLoader/loader.html?link=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdQw4w9WgXcQ
