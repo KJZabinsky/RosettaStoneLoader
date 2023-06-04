@@ -14,6 +14,7 @@
         }
 
         .loader {
+            display: none; /* Hide the loader initially */
             width: 45px;
             height: 45px;
             border: 6px solid #f1f3f6;
@@ -32,6 +33,7 @@
         }
 
         .message-window {
+            display: none; /* Hide the message window initially */
             max-width: 400px;
             background-color: white;
             border: 2px solid #BBBBBB;
@@ -98,65 +100,31 @@
             if (link) {
                 setTimeout(function () {
                     window.location.href = link;
-                }, 30000); // Delay the redirection by 30 seconds
-            } else {
-                var failedPage = document.createElement("div");
-                failedPage.className = "message-window";
-
-                var failedTitle = document.createElement("div");
-                failedTitle.className = "failed-title";
-                failedTitle.textContent = "⚠️ Connection Error";
-
-                var line = document.createElement("div");
-                line.className = "line";
-
-                var failedMessage = document.createElement("div");
-                failedMessage.className = "failed-message";
-                failedMessage.textContent = "Failed to load Rosetta Stone, Please try again later.";
-
-                var tryAgainButton = document.createElement("button");
-                tryAgainButton.className = "action-button try-again-button";
-                tryAgainButton.textContent = "Try Again";
-                tryAgainButton.addEventListener("click", function () {
-                    failedMessage.textContent = "Failed to connect to our servers. Try again later.";
-                    tryAgainButton.style.display = "none";
-                });
-
-                var exitButton = document.createElement("button");
-                exitButton.className = "action-button cancel-button";
-                exitButton.textContent = "Cancel";
-                exitButton.addEventListener("click", function () {
-                    window.location.href = "https://www.rosettastone.com";
-                });
-
-                var buttonContainer = document.createElement("div");
-                buttonContainer.className = "button-container";
-                buttonContainer.appendChild(exitButton);
-                buttonContainer.appendChild(tryAgainButton);
-
-                failedPage.appendChild(failedTitle);
-                failedPage.appendChild(line);
-                failedPage.appendChild(failedMessage);
-                failedPage.appendChild(buttonContainer);
-
-                document.body.innerHTML = "";
-                document.body.appendChild(failedPage);
+                }, 30000); // Delay the redirection
             }
         }
 
         function showLoadingScreen() {
             isLoading = true;
 
-            var loader = document.createElement("div");
-            loader.className = "loader";
-            document.body.innerHTML = "";
-            document.body.appendChild(loader);
+            var loader = document.querySelector('.loader');
+            var messageWindow = document.querySelector('.message-window');
+            
+            if (loader && messageWindow) {
+                loader.style.display = "block"; // Show the loader
+                messageWindow.style.display = "none"; // Hide the message window
+            }
         }
 
         function hideLoadingScreen() {
             isLoading = false;
-            document.body.innerHTML = "";
-            openLink();
+            var loader = document.querySelector('.loader');
+            var messageWindow = document.querySelector('.message-window');
+            
+            if (loader && messageWindow) {
+                loader.style.display = "none"; // Hide the loader
+                messageWindow.style.display = "block"; // Show the message window
+            }
         }
 
         window.onload = function () {
@@ -172,13 +140,27 @@
         document.onkeydown = function (e) {
             if (e.key === " ") {
                 e.preventDefault();
-                if (!isLoading) {
-                    showLoadingScreen();
+                var loader = document.querySelector('.loader');
+                var messageWindow = document.querySelector('.message-window');
+                
+                if (loader && messageWindow) {
+                    loader.style.display = "block"; // Show the loader
+                    messageWindow.style.display = "none"; // Hide the message window
                 }
             }
         };
     </script>
 </head>
 <body>
+    <div class="loader"></div>
+    <div class="message-window">
+        <div class="failed-title">⚠️ Connection Error</div>
+        <div class="line"></div>
+        <div class="failed-message">Failed to load Rosetta Stone. Please try again later.</div>
+        <div class="button-container">
+            <button class="action-button try-again-button">Try Again</button>
+            <button class="action-button cancel-button">Cancel</button>
+        </div>
+    </div>
 </body>
 </html>
