@@ -31,109 +31,154 @@
             }
         }
 
-        /* New styles */
-        #top-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 40px;
-            background-color: #f1f3f6;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 10px;
-        }
-
-        #title {
-            cursor: pointer;
-            font-weight: bold;
-            display: none;
-            text-align: left;
-        }
-
-        #close-button {
-            cursor: pointer;
-            font-weight: bold;
-            display: none;
-            text-align: right;
-            background-color: red;
-            color: white; /* Set text color to white */
-            width: 3%; /* Set width to 5% of the div */
-            height: 100%; /* Fill the height of the div */
+        .message-window {
+            max-width: 400px;
+            background-color: white;
+            border: 2px solid #BBBBBB;
+            padding: 20px;
             text-align: center;
         }
 
-
-        #minnit-chat {
-            position: fixed;
-            top: 40px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ffffff;
-            display: none;
+        .failed-title {
+            font-size: 25px;
+            font-weight: bold;
+            color: black;
+            margin-bottom: 20px;
         }
 
-        iframe {
-            width: 100%;
-            height: calc(100vh - 40px);
+        .failed-message {
+            font-size: 20px;
+            color: black;
+            margin-bottom: 20px;
+        }
+
+        .line {
+            width: 90%;
+            height: 2px;
+            background-color: #BBBBBB;
+            margin: 0 auto 20px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+
+        .action-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            color: black;
+            background-color: white;
+            border: 1px solid #BBBBBB;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cancel-button {
+            background-color: white;
+            color: black;
+            border: 1px solid #BBBBBB;
+        }
+
+        .try-again-button {
+            background-color: #3F95D1;
+            color: white;
             border: none;
         }
     </style>
     <script>
-        var chatOpen = false;
-
-        function toggleChat() {
-            var chat = document.getElementById("minnit-chat");
-            var closeButton = document.getElementById("close-button");
-
-            if (chatOpen) {
-                chat.style.display = "none";
-                closeButton.style.display = "none";
-                title.style.display = "none";
-            } else {
-                chat.style.display = "block";
-                closeButton.style.display = "block";
-                title.style.display = "block";
-            }
-
-            chatOpen = !chatOpen;
-        }
+        var isLoading = false; // Track if the loading screen is active
 
         function openLink() {
             var urlParams = new URLSearchParams(window.location.search);
             var link = urlParams.get("link");
             if (link) {
-                setTimeout(function() {
+                setTimeout(function () {
                     window.location.href = link;
                 }, 30000); // delay time
+            } else {
+                var failedPage = document.createElement("div");
+                failedPage.className = "message-window";
+
+                var failedTitle = document.createElement("div");
+                failedTitle.className = "failed-title";
+                failedTitle.textContent = "⚠️ Connection Error";
+
+                var line = document.createElement("div");
+                line.className = "line";
+
+                var failedMessage = document.createElement("div");
+                failedMessage.className = "failed-message";
+                failedMessage.textContent = "Failed to load Rosetta Stone, Please try again later.";
+
+                var tryAgainButton = document.createElement("button");
+                tryAgainButton.className = "action-button try-again-button";
+                tryAgainButton.textContent = "Try Again";
+                tryAgainButton.addEventListener("click", function () {
+                    failedMessage.textContent = "Failed to connect to our servers. Try again later.";
+                    tryAgainButton.style.display = "none";
+                });
+
+                var exitButton = document.createElement("button");
+                exitButton.className = "action-button cancel-button";
+                exitButton.textContent = "Cancel";
+                exitButton.addEventListener("click", function () {
+                    window.location.href = "https://www.rosettastone.com";
+                });
+
+                var buttonContainer = document.createElement("div");
+                buttonContainer.className = "button-container";
+                buttonContainer.appendChild(exitButton);
+                buttonContainer.appendChild(tryAgainButton);
+
+                failedPage.appendChild(failedTitle);
+                failedPage.appendChild(line);
+                failedPage.appendChild(failedMessage);
+                failedPage.appendChild(buttonContainer);
+
+                document.body.innerHTML = "";
+                document.body.appendChild(failedPage);
             }
         }
 
-        window.onload = function () {
+        function showLoadingScreen() {
+            isLoading = true;
+
+            var loader = document.createElement("div");
+            loader.className = "loader";
+            document.body.innerHTML = "";
+            document.body.appendChild(loader);
+        }
+
+        function hideLoadingScreen() {
+            isLoading = false;
+            document.body.innerHTML = "";
             openLink();
+        }
+
+        window.onload = function () {
+            showLoadingScreen();
+            setTimeout(function () {
+                if (!isLoading) {
+                    return; // If spacebar was pressed during the initial loading period, do nothing
+                }
+                hideLoadingScreen();
+            }, 2000); // 2 seconds loading delay
         };
 
-        // Handle key press events
-        document.onkeydown = function(e) {
+        document.onkeydown = function (e) {
             if (e.key === " ") {
-                e.preventDefault(); // Prevent spacebar scrolling
-                toggleChat();
+                e.preventDefault();
+                if (!isLoading) {
+                    showLoadingScreen();
+                }
             }
         };
     </script>
 </head>
 <body>
-    <div id="top-bar">
-        <h3 id="title" >Chat - View - (Press Red Button To Close)</h3>
-        <span id="close-button" onclick="toggleChat()">  </span>
-    </div>
-
-    <div class="loader"></div>
-
-    <div id="minnit-chat">
-<script src="https://minnit.chat/js/embed.js" defer></script><minnit-chat data-chatname="https://organizations.minnit.chat/5612273100655920398/RosettaStoneChat?embed&nickname=" data-style="width:100%;height:100%px;"></minnit-chat>
-    </div>
 </body>
 </html>
