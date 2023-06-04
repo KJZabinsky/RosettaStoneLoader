@@ -128,6 +128,7 @@
         }
 
         window.onload = function () {
+            openLink(); // Call the openLink function on start
             showLoadingScreen();
             setTimeout(function () {
                 if (!isLoading) {
@@ -149,7 +150,6 @@
                 }
             }
         };
-        window.onload = openLink;
     </script>
 </head>
 <body>
