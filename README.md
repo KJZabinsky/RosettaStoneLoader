@@ -10,7 +10,7 @@ Please use the links wisely. Do not harm anyone in any way or form.
 To launch the loader use this link below, Remember to bookmark it for future use!
 # https://kjzabinsky.github.io/RosettaStoneLoader/loader.html
 
-Spacebar - Open Chat Window
+Spacebar - Switch to Loading Screen (Required!)
 
 # Special Links Listed Below (You can customize these!)
 
