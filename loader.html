@@ -86,9 +86,7 @@
         }
 
         .try-again-button {
-            background-color: #3F95D1;
-            color: white;
-            border: none;
+            display: none; /* Hide the Try Again button */
         }
     </style>
     <script>
@@ -150,6 +148,11 @@
                 }
             }
         };
+
+        // Function to handle Cancel button click
+        function handleCancelClick() {
+            window.location.href = "https://www.rosettastone.com"; // Redirect to Rosetta Stone website
+        }
     </script>
 </head>
 <body>
@@ -159,8 +162,7 @@
         <div class="line"></div>
         <div class="failed-message">Failed to load Rosetta Stone. Please try again later.</div>
         <div class="button-container">
-            <button class="action-button try-again-button">Try Again</button>
-            <button class="action-button cancel-button">Cancel</button>
+            <button class="action-button cancel-button" onclick="handleCancelClick()">Cancel</button>
         </div>
     </div>
 </body>
